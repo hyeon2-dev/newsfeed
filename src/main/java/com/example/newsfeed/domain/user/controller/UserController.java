@@ -3,6 +3,7 @@ package com.example.newsfeed.domain.user.controller;
 import com.example.newsfeed.common.annotation.Auth;
 import com.example.newsfeed.domain.auth.dto.response.AuthUser;
 import com.example.newsfeed.domain.user.dto.request.ChangePasswordRequestDto;
+import com.example.newsfeed.domain.user.dto.request.DeleteAccountRequestDto;
 import com.example.newsfeed.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.newsfeed.domain.user.dto.response.UserResponseDto;
 import com.example.newsfeed.domain.user.service.UserService;
@@ -20,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     // 유저 전체 조회(페이징)
-    @GetMapping("/users")
+    @GetMapping("/users/page")
     public ResponseEntity<Page<UserResponseDto>> getAllUsers(
             @Auth AuthUser authUser,
             @RequestParam(defaultValue = "1") int page,
@@ -59,9 +60,12 @@ public class UserController {
 
     // 회원 탈퇴
     @DeleteMapping("/users/delete")
-    public ResponseEntity<String> deleteUser(@Auth AuthUser authUser) {
-        userService.deleteUser(authUser);
-        return new ResponseEntity<>("유저가 삭제되었습니다.", HttpStatus.OK);
+    public ResponseEntity<String> deleteUser(
+            @Auth AuthUser authUser,
+            @RequestBody DeleteAccountRequestDto dto
+    ) {
+        userService.deleteUser(authUser, dto);
+        return new ResponseEntity<>("회원탈퇴가 완료되었습니다.", HttpStatus.OK);
     }
 
 }

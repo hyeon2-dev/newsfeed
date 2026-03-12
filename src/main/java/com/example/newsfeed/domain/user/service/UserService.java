@@ -5,6 +5,7 @@ import com.example.newsfeed.common.exception.BaseException;
 import com.example.newsfeed.common.exception.ErrorCode;
 import com.example.newsfeed.domain.auth.dto.response.AuthUser;
 import com.example.newsfeed.domain.user.dto.request.ChangePasswordRequestDto;
+import com.example.newsfeed.domain.user.dto.request.DeleteAccountRequestDto;
 import com.example.newsfeed.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.newsfeed.domain.user.dto.response.UserResponseDto;
 import com.example.newsfeed.domain.user.entity.User;
@@ -106,10 +107,15 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(AuthUser authUser) {
+    public void deleteUser(AuthUser authUser, DeleteAccountRequestDto dto) {
         User user = userRepository.findById(authUser.getUserId()).orElseThrow(
                 () -> new BaseException(ErrorCode.USER_NOT_FOUND, null)
         );
+
+        // 삭제전 본인 확인하기 위한 비밀번호 확인
+        if (!passwordEncoder.matches(dto.getPasswordCheck(), user.getPassword())) {
+            throw new BaseException(ErrorCode.INVALID_PASSWORD, null);
+        }
 
         userRepository.delete(user);
     }
