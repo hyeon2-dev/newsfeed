@@ -18,14 +18,18 @@ public enum ErrorCode {
 
     // 게시물 관련 코드
     POST_NOT_FOUND("id에 맞는 게시물이 없습니다.", HttpStatus.NOT_FOUND),
-    FORBIDDEN_POST("본인 게시물아니어서 권한이 없습니다.", HttpStatus.FORBIDDEN),
+    FORBIDDEN_POST("본인 게시물 아니어서 권한이 없습니다.", HttpStatus.FORBIDDEN),
 
     // 팔로우 관련 코드
     CANNOT_FOLLOW_SELF("본인이 본인을 팔로우할 수 없습니다.", HttpStatus.BAD_REQUEST),
     CANNOT_UNFOLLOW_SELF("본인이 본인을 언팔로우할 수 없습니다.", HttpStatus.BAD_REQUEST),
     ALREADY_FOLLOWING("이미 팔로우 상태입니다.", HttpStatus.CONFLICT),
     ALREADY_UNFOLLOWING("이미 언팔로우 상태입니다.", HttpStatus.CONFLICT),
-    FOLLOW_NOT_FOUND("팔로우상태를 찾을 수 없습니다", HttpStatus.NOT_FOUND);
+    FOLLOW_NOT_FOUND("팔로우상태를 찾을 수 없습니다", HttpStatus.NOT_FOUND),
+
+    // 댓글 관련 코드
+    COMMENT_NOT_FOUND("id에 맞는 댓글이 업ㅅ습니다.", HttpStatus.NOT_FOUND),
+    FORBIDDEN_COMMENT("본인 댓글이 아니어서 권한이 없습니다.", HttpStatus.FORBIDDEN);
 
     private final String message;
     private final HttpStatus httpStatus;
