@@ -28,8 +28,13 @@ public enum ErrorCode {
     FOLLOW_NOT_FOUND("팔로우상태를 찾을 수 없습니다", HttpStatus.NOT_FOUND),
 
     // 댓글 관련 코드
-    COMMENT_NOT_FOUND("id에 맞는 댓글이 업ㅅ습니다.", HttpStatus.NOT_FOUND),
-    FORBIDDEN_COMMENT("본인 댓글이 아니어서 권한이 없습니다.", HttpStatus.FORBIDDEN);
+    COMMENT_NOT_FOUND("id에 맞는 댓글이 없습니다.", HttpStatus.NOT_FOUND),
+    FORBIDDEN_COMMENT("본인 댓글이 아니어서 권한이 없습니다.", HttpStatus.FORBIDDEN),
+
+    // 게시물 좋아요 코드
+    ALREADY_LIKED_POST("이미 좋아요를 눌렀습니다.", HttpStatus.CONFLICT),
+    LIKE_NOT_FOUND("좋아요가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
+    ALREADY_NOT_LIKE("이미 좋아요를 취소했습니다.", HttpStatus.CONFLICT);
 
     private final String message;
     private final HttpStatus httpStatus;

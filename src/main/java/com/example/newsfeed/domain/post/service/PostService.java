@@ -39,6 +39,7 @@ public class PostService {
                 post.getId(),
                 post.getUser().getId(),
                 post.getContents(),
+                post.getLikeCount(),
                 post.getCreatedAt(),
                 post.getModifiedAt()
         );
